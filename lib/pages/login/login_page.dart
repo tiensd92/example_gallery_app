@@ -25,12 +25,14 @@ class LoginPage extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: const Color.fromRGBO(143, 148, 251, 1)),
+                          color: const Color.fromRGBO(143, 148, 251, 1),
+                        ),
                         boxShadow: const [
                           BoxShadow(
-                              color: Color.fromRGBO(143, 148, 251, .2),
-                              blurRadius: 20.0,
-                              offset: Offset(0, 10))
+                            color: Color.fromRGBO(143, 148, 251, .2),
+                            blurRadius: 20.0,
+                            offset: Offset(0, 10),
+                          )
                         ],
                       ),
                       child: Column(
@@ -38,10 +40,12 @@ class LoginPage extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color:
-                                            Color.fromRGBO(143, 148, 251, 1)))),
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromRGBO(143, 148, 251, 1),
+                                ),
+                              ),
+                            ),
                             child: _buildUsernameField(context),
                           ),
                           Container(
@@ -70,9 +74,12 @@ class LoginPage extends StatelessWidget {
   Widget _buildUsernameField(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "Username",
-          hintStyle: TextStyle(color: Colors.grey[700])),
+        border: InputBorder.none,
+        hintText: "Username",
+        hintStyle: TextStyle(
+          color: Colors.grey[700],
+        ),
+      ),
     );
   }
 
@@ -80,9 +87,12 @@ class LoginPage extends StatelessWidget {
     return TextField(
       obscureText: true,
       decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "Password",
-          hintStyle: TextStyle(color: Colors.grey[700])),
+        border: InputBorder.none,
+        hintText: "Password",
+        hintStyle: TextStyle(
+          color: Colors.grey[700],
+        ),
+      ),
     );
   }
 
@@ -98,15 +108,21 @@ class LoginPage extends StatelessWidget {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(colors: [
+          borderRadius: BorderRadius.circular(10),
+          gradient: const LinearGradient(
+            colors: [
               Color.fromRGBO(143, 148, 251, 1),
               Color.fromRGBO(143, 148, 251, .6),
-            ])),
+            ],
+          ),
+        ),
         child: const Center(
           child: Text(
             "Login",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

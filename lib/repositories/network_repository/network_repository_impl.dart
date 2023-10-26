@@ -7,7 +7,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
   @override
   Future<bool> signIn(
       {required String username, required String password}) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     final users = UserModel.mocks();
 
     if (!users.contains(
@@ -27,51 +27,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
 
   @override
   Future<List<ImageModel>> fetchGalleries() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    return [
-      ImageModel(
-        pic: 'assets/images/1.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/2.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/3.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/4.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/5.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/6.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/7.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/8.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/9.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/10.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/11.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/12.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/13.jpg',
-      ),
-      ImageModel(
-        pic: 'assets/images/14.jpg',
-      ),
-    ];
+    await Future.delayed(const Duration(seconds: 3));
+    return ImageModel.mocks();
   }
 }

@@ -63,7 +63,7 @@ class GalleryPage extends StatelessWidget {
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int i) {
-          return Product(productImage: listItem[i]['pic']);
+          return Product(productImage: listItem[i]['pic'].toString());
         },
       ),
     );
