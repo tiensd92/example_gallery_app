@@ -1,4 +1,6 @@
+import 'package:example_gallery_app/blocs/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/core.dart';
 import 'pages/pages.dart';
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: BlocProvider(
+        create: (context) => AuthBloc(),
+        child: LoginPage(),
+      ),
     );
   }
 }
