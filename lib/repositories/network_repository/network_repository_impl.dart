@@ -13,7 +13,7 @@ class NetworkRepositoryImpl implements NetworkRepository {
     if (!users.contains(
       UserModel(
         username: username,
-        password: hashPassword(password),
+        password: password,
       ),
     )) {
       throw ServerFailue(

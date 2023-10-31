@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:example_gallery_app/blocs/auth_bloc.dart';
 import 'package:example_gallery_app/blocs/auth_event.dart';
 import 'package:example_gallery_app/blocs/auth_state.dart';
-import 'package:example_gallery_app/core/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,8 +65,8 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginButton(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (BuildContext context, state) {
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (BuildContext context, AuthState state) {
         if (state == AuthState.authenticated) {
           Navigator.pushReplacement(
             context,
@@ -76,6 +75,8 @@ class LoginPage extends StatelessWidget {
             ),
           );
         }
+      },
+      builder: (BuildContext context, state) {
         return GestureDetector(
           onTap: () async {
             final authBloc = BlocProvider.of<AuthBloc>(context);
@@ -87,20 +88,12 @@ class LoginPage extends StatelessWidget {
               final password = loginGlobalKey.currentState?.getPassword;
 
               try {
-                authBloc.onLogin(LoginEvent(password: password!, username: userName!));
+                authBloc.onLoginTab(LoginEvent(
+                  username: userName!,
+                  password: password!,
+                ));
               } catch (e) {
-                final scaffoldMessenger = ScaffoldMessenger.of(context);
-                scaffoldMessenger.showSnackBar(
-                  SnackBar(
-                    content: const Text('Login unsuccessfull'),
-                    action: SnackBarAction(
-                      label: 'Close',
-                      onPressed: () {
-                        scaffoldMessenger.hideCurrentSnackBar();
-                      },
-                    ),
-                  ),
-                );
+                onShowError(context);
               }
             }
           },
@@ -129,6 +122,21 @@ class LoginPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void onShowError(context) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    scaffoldMessenger.showSnackBar(
+      SnackBar(
+        content: const Text('Login unsuccessfull'),
+        action: SnackBarAction(
+          label: 'Close',
+          onPressed: () {
+            scaffoldMessenger.hideCurrentSnackBar();
+          },
+        ),
+      ),
     );
   }
 }
@@ -200,7 +208,7 @@ class LoginFormState extends State<LoginForm> with InputValidationMixin {
           color: Colors.grey[700],
         ),
       ),
-      validator: (String? username) {
+      validator: (username) {
         return onValidForm(
           input: username,
           fieldName: 'Username',
@@ -220,7 +228,7 @@ class LoginFormState extends State<LoginForm> with InputValidationMixin {
           color: Colors.grey[700],
         ),
       ),
-      validator: (String? password) {
+      validator: (password) {
         return onValidForm(
           input: password,
           fieldName: 'Password',
@@ -233,7 +241,7 @@ class LoginFormState extends State<LoginForm> with InputValidationMixin {
 mixin InputValidationMixin {
   String? onValidForm({String? input, required String fieldName}) {
     if (input == null) return '$fieldName is not empty';
-    if (input.length < 3) {
+    if (input.trim().length < 3) {
       return 'The $fieldName shouble be at least 3 letters.';
     }
     return null;
